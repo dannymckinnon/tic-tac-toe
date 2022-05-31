@@ -1,31 +1,63 @@
-// gameboard object
+//gameboard object
 const gameBoard = (() => {
   const board = [
-    'x', 'o', 'x',
-    'o', 'x', 'o',
-    'x', 'o', 'x'
+    '', '', '',
+    '', '', '',
+    '', '', ''
   ];
-  // function that changes board array and runs display function
-  return {};
+  return {board};
 })();
 
 
-// object to control flow of game
-const game = (() => {
-  return {};
+
+
+
+//keep track of game score
+const gameController = (() => {
+  function selectSquare(e) {
+    const index = e.target.getAttribute('data-index');
+    gameBoard.board[index] = 'X';
+    displayController.displayBoard(gameBoard.board);
+  }
+  return {selectSquare}
 })();
 
 
-// display contents on webpage
-  // event listener that runs gameboard function that changes board array
+
+
+
+//display contents on webpage
 const displayController = (() => {
-  return {};
+  const square = document.querySelectorAll('.square');
+
+  for (let i = 0; i < square.length; i++) {
+    square[i].addEventListener('click', gameController.selectSquare);
+  }
+
+
+  function displayBoard(gameboard) {
+    for (let i = 0; i < gameboard.length; i++) {
+      square[i].textContent = gameboard[i];
+    }
+  }
+  return {displayBoard};
 })();
 
 
-// player factory
-const Player = (name, team) => {
-  const getName = () => name;
-  const getTeam = () => team;
-  return {getTeam, getName};
+
+
+
+//player factory
+const Player = (team) => {
+  return {team};
 };
+
+
+
+
+
+const playerOne = Player('X');
+const playerTwo = Player('O');
+
+
+displayController.displayBoard(gameBoard.board);
