@@ -83,7 +83,7 @@ const gameController = (() => {
         displayController.removeEventlisteners();
         //display player name who won on DOM
         console.log(`${player.team} has won!`);
-      } else if (movesPlayed === 8) {
+      } else if (movesPlayed === 8 && result) {
         //display its a tye text on page
         console.log('It\'s a tye');
       }
