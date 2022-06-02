@@ -59,8 +59,10 @@ const displayController = (() => {
 //keep track of game score and player selection
 const gameController = (() => {
   let lastPlayer = playerOne;
+  let movesPlayed = 0;
 
   function checkWin(gameboard, player) {
+    //divide up the gameboard into winning combos
     const rowSlice1 = gameboard.slice(0, 3);
     const rowSlice2 = gameboard.slice(3, 6);
     const rowSlice3 = gameboard.slice(6, 9);
@@ -79,6 +81,11 @@ const gameController = (() => {
       const result = allEqual(sliceArray[i]);
       if (result) {
         displayController.removeEventlisteners();
+        //display player name who won on DOM
+        console.log(`${player.team} has won!`);
+      } else if (movesPlayed === 8) {
+        //display its a tye text on page
+        console.log('It\'s a tye');
       }
     }
   }
@@ -90,6 +97,7 @@ const gameController = (() => {
       displayController.displayBoard(gameBoard.board);
       checkWin(gameBoard.board, lastPlayer);
       lastPlayer = (lastPlayer === playerOne) ? playerTwo : playerOne;
+      movesPlayed++;
     }
   }
 
