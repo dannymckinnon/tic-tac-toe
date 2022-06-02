@@ -1,3 +1,17 @@
+//player factory
+const Player = (team) => {
+
+  return {team};
+};
+
+
+const playerOne = Player('X');
+const playerTwo = Player('O');
+
+
+
+
+
 //gameboard object
 const gameBoard = (() => {
   const board = [
@@ -17,14 +31,17 @@ const gameBoard = (() => {
 const displayController = (() => {
   const square = document.querySelectorAll('.square');
 
-
   function createEventListeners() {
-    
     for (let i = 0; i < square.length; i++) {
       square[i].addEventListener('click', gameController.selectSquare);
     }
   }
 
+  function removeEventlisteners() {
+    for (let i = 0; i < square.length; i++) {
+      square[i].removeEventListener('click', gameController.selectSquare);
+    }
+  }
 
   function displayBoard(gameboard) {
     for (let i = 0; i < gameboard.length; i++) {
@@ -32,33 +49,24 @@ const displayController = (() => {
     }
   }
 
-  return {displayBoard, createEventListeners};
+  return {displayBoard, createEventListeners, removeEventlisteners};
 })();
 
 
 
 
 
-//player factory
-const Player = (team) => {
-  return {team};
-};
-
-
-const playerOne = Player('X');
-const playerTwo = Player('O');
-
-
-
-
-
-//keep track of game score
+//keep track of game score and player selection
 const gameController = (() => {
   let lastPlayer = playerOne;
 
+  function checkWin(gameboard, player) {
+    //make new arrays out of board array with all 8 combinations of win scenarios
+    for 
+  }
+
   function selectSquare(e) {
     const index = e.target.getAttribute('data-index');
-    
     if (gameBoard.board[index] === '') {
       gameBoard.board[index] = lastPlayer.team;
       displayController.displayBoard(gameBoard.board);
@@ -74,9 +82,6 @@ const gameController = (() => {
 
 
 displayController.createEventListeners();
-
-
-
 
 // when working in a module IIFE, since they run immediately, i cannot access variables that are defined AFTER the module. 
 // So does that mean I have to place my module design pattern code AFTER any variables that it references, just like globally scoped code?
