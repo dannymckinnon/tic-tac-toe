@@ -68,7 +68,7 @@ const gameController = (() => {
     const rowSlice3 = gameboard.slice(6, 9);
     const colSlice1 = [gameboard[0], gameboard[3], gameboard[6]]; 
     const colSlice2 = [gameboard[1], gameboard[4], gameboard[7]]; 
-    const colSlice3 = [gameboard[3], gameboard[5], gameboard[8]]; 
+    const colSlice3 = [gameboard[2], gameboard[5], gameboard[8]]; 
     const diagSlice1 = [gameboard[0], gameboard[4], gameboard[8]];
     const diagSlice2 = [gameboard[2], gameboard[4], gameboard[6]];
 
