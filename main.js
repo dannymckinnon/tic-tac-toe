@@ -61,8 +61,26 @@ const gameController = (() => {
   let lastPlayer = playerOne;
 
   function checkWin(gameboard, player) {
-    //make new arrays out of board array with all 8 combinations of win scenarios
-    for 
+    const rowSlice1 = gameboard.slice(0, 3);
+    const rowSlice2 = gameboard.slice(3, 6);
+    const rowSlice3 = gameboard.slice(6, 9);
+    const colSlice1 = [gameboard[0], gameboard[3], gameboard[6]]; 
+    const colSlice2 = [gameboard[1], gameboard[4], gameboard[7]]; 
+    const colSlice3 = [gameboard[3], gameboard[5], gameboard[8]]; 
+    const diagSlice1 = [gameboard[0], gameboard[4], gameboard[8]];
+    const diagSlice2 = [gameboard[2], gameboard[4], gameboard[6]];
+
+    const sliceArray = [rowSlice1, rowSlice2, rowSlice3,
+                        colSlice1, colSlice2, colSlice3,
+                        diagSlice1, diagSlice2];
+    
+    for (let i = 0; i < sliceArray.length; i++) {
+      const allEqual = arr => arr.every(val => val === player.team);
+      const result = allEqual(sliceArray[i]);
+      if (result) {
+        displayController.removeEventlisteners();
+      }
+    }
   }
 
   function selectSquare(e) {
@@ -70,6 +88,7 @@ const gameController = (() => {
     if (gameBoard.board[index] === '') {
       gameBoard.board[index] = lastPlayer.team;
       displayController.displayBoard(gameBoard.board);
+      checkWin(gameBoard.board, lastPlayer);
       lastPlayer = (lastPlayer === playerOne) ? playerTwo : playerOne;
     }
   }
