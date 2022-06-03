@@ -1,6 +1,6 @@
 //player factory
 const Player = (team) => {
-
+  
   return {team};
 };
 
@@ -75,18 +75,19 @@ const gameController = (() => {
     const sliceArray = [rowSlice1, rowSlice2, rowSlice3,
                         colSlice1, colSlice2, colSlice3,
                         diagSlice1, diagSlice2];
-    
+
     for (let i = 0; i < sliceArray.length; i++) {
       const allEqual = arr => arr.every(val => val === player.team);
       const result = allEqual(sliceArray[i]);
       if (result) {
         displayController.removeEventlisteners();
-        //display player name who won on DOM
         console.log(`${player.team} has won!`);
-      } else if (movesPlayed === 8 && result) {
-        //display its a tye text on page
-        console.log('It\'s a tye');
-      }
+        return;
+      } 
+    }
+    if (movesPlayed === 9) {
+      displayController.removeEventlisteners();
+      console.log('its a tye');
     }
   }
 
@@ -95,9 +96,10 @@ const gameController = (() => {
     if (gameBoard.board[index] === '') {
       gameBoard.board[index] = lastPlayer.team;
       displayController.displayBoard(gameBoard.board);
+      movesPlayed++;
+      console.log(movesPlayed);
       checkWin(gameBoard.board, lastPlayer);
       lastPlayer = (lastPlayer === playerOne) ? playerTwo : playerOne;
-      movesPlayed++;
     }
   }
 
@@ -110,9 +112,3 @@ const gameController = (() => {
 
 displayController.createEventListeners();
 
-// when working in a module IIFE, since they run immediately, i cannot access variables that are defined AFTER the module. 
-// So does that mean I have to place my module design pattern code AFTER any variables that it references, just like globally scoped code?
-
-
-// ok then would it make sense to think of module design patterns as behaving similiar to global code except that it has 
-// the added benefit of its own namespacing, scope, and closure?
