@@ -1,7 +1,7 @@
 //player factory
 const Player = (team) => {
-  
-  return {team};
+  let name = '';
+  return {team, name};
 };
 
 
@@ -30,14 +30,20 @@ const gameBoard = (() => {
 //display contents on webpage
 const displayController = (() => {
   const square = document.querySelectorAll('.square');
-  const playerOneName = document.querySelector('.player-one button');
-  const playerTwoName = document.querySelector('.player-two button');
+  const playerOneBtn = document.querySelector('.player-one button');
+  const playerTwoBtn = document.querySelector('.player-two button');
+  const playerOneDiv = document.querySelector('.player-one');
+  const playerTwoDiv = document.querySelector('.player-two');
 
   function createEventListeners() {
     for (let i = 0; i < square.length; i++) {
       square[i].addEventListener('click', gameController.selectSquare);
     }
-    nameSubmit.addEventListener('click', )
+    playerOneBtn.addEventListener('click', () => {
+      const input = document.querySelector('.player-one input');
+      setName(playerOne, input.value, playerOneDiv, playerTwoDiv);
+      
+    });
   }
 
   function removeEventlisteners() {
@@ -50,6 +56,12 @@ const displayController = (() => {
     for (let i = 0; i < gameboard.length; i++) {
       square[i].textContent = gameboard[i];
     }
+  }
+
+  function setName(player, newName, playerDiv, opponentDiv) {
+    player.name = newName;
+    playerDiv.style.display = 'none';
+    opponentDiv.style.display = 'flex';
   }
 
   return {displayBoard, createEventListeners, removeEventlisteners};
