@@ -25,3 +25,15 @@ body {
   align-items: center;
   border: 1px solid black;
 }
+
+.player-one, .player-two {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  /* border: 1px solid red; */
+}
+
+.player-two {
+  display: none;
+}

@@ -30,11 +30,14 @@ const gameBoard = (() => {
 //display contents on webpage
 const displayController = (() => {
   const square = document.querySelectorAll('.square');
+  const playerOneName = document.querySelector('.player-one button');
+  const playerTwoName = document.querySelector('.player-two button');
 
   function createEventListeners() {
     for (let i = 0; i < square.length; i++) {
       square[i].addEventListener('click', gameController.selectSquare);
     }
+    nameSubmit.addEventListener('click', )
   }
 
   function removeEventlisteners() {
@@ -88,6 +91,7 @@ const gameController = (() => {
     if (movesPlayed === 9) {
       displayController.removeEventlisteners();
       console.log('its a tye');
+      return;
     }
   }
 
