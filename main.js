@@ -1,6 +1,9 @@
 //player factory
 const Player = (team) => {
   let name = '';
+  function setName() {
+    const nameElement = document.querySelector()
+  }
   return {team, name};
 };
 
@@ -52,12 +55,20 @@ const displayController = (() => {
       const container = document.querySelector('.container');
       playerOne.name = playerOneName;
       playerTwo.name = playerTwoName;
+      displayName(playerOneName, playerTwoName);
       console.log(playerOne.name);
       console.log(playerTwo.name);
       setPlayer.style.display = 'none';
       container.style.display = 'flex';
       displayController.createEventListeners();
     })
+  }
+
+  function displayName (name1, name2) {
+    const player1 = document.querySelector('.player-one-stats h1');
+    const player2 = document.querySelector('.player-two-stats h1');
+    player1.textContent = name1;
+    player2.textContent = name2;
   }
 
   function displayBoard(gameboard) {
