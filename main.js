@@ -54,8 +54,6 @@ const displayController = (() => {
       '', '', '',
       '', '', ''
     ];
-    gameController.movesPlayed = 0;
-    console.log(gameController.movesPlayed);
     displayController.createEventListeners();
     displayBoard(gameBoard.board);
   }
@@ -143,14 +141,14 @@ const gameController = (() => {
         displayController.removeEventlisteners();
         player.wins++;
         displayController.updateWin(player);
-        //run function to update DOm to show wins
-        console.log(player.wins);
+        movesPlayed = 0;
         console.log(`${player.team} has won!`);
         return;
       } 
     }
     if (movesPlayed === 9) {
       displayController.removeEventlisteners();
+      movesPlayed = 0
       console.log('its a tye');
       return;
     }
