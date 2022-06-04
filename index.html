@@ -9,6 +9,7 @@
   <script src="main.js" defer></script>
 </head>
 <body>
+  
   <form autocomplete="off" class="set-player">
     <label for="name" >Player 1</label>
     <input id="name" maxlength="18" placeholder="Enter Name" required type="text">
@@ -17,16 +18,31 @@
     <button type="button">Start Game</button>
   </form>
   
-  <div class="game-board">
-    <div class="square" data-index="0"></div>
-    <div class="square" data-index="1"></div>
-    <div class="square" data-index="2"></div>
-    <div class="square" data-index="3"></div>
-    <div class="square" data-index="4"></div>
-    <div class="square" data-index="5"></div>
-    <div class="square" data-index="6"></div>
-    <div class="square" data-index="7"></div>
-    <div class="square" data-index="8"></div>
+  <div class="container">
+    
+    <div class="player-stats">
+      <h1>Danny</h1>
+      <h2>0</h2>
+    </div>
+   
+    <div class="game-board">
+      <div class="square" data-index="0"></div>
+      <div class="square" data-index="1"></div>
+      <div class="square" data-index="2"></div>
+      <div class="square" data-index="3"></div>
+      <div class="square" data-index="4"></div>
+      <div class="square" data-index="5"></div>
+      <div class="square" data-index="6"></div>
+      <div class="square" data-index="7"></div>
+      <div class="square" data-index="8"></div>
+    </div>
+    
+    <div class="player-stats">
+      <h1>Flora</h1>
+      <h2>3</h2>
+    </div>
+  
   </div>
+
 </body>
 </html>
