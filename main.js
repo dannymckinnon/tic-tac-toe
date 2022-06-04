@@ -49,11 +49,13 @@ const displayController = (() => {
       const playerOneName = document.querySelector('#name').value;
       const playerTwoName = document.querySelector('#name2').value;
       const setPlayer = document.querySelector('.set-player');
+      const container = document.querySelector('.container');
       playerOne.name = playerOneName;
       playerTwo.name = playerTwoName;
       console.log(playerOne.name);
       console.log(playerTwo.name);
-      setPlayer.style.visibility = 'hidden';
+      setPlayer.style.display = 'none';
+      container.style.display = 'flex';
       displayController.createEventListeners();
     })
   }

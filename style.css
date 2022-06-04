@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  /* border: 1px solid red; */
 }
 
 body {
@@ -13,12 +14,14 @@ body {
 }
 
 .container {
-  display: flex;
-  justify-content: space-around;
-  padding: 1rem;
+  justify-content: space-evenly;
+  padding: 1rem 30rem;
+  display: none;
+  margin-top: 10%;
 }
 
 .game-board {
+  flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -38,9 +41,9 @@ body {
 .set-player {
   display: grid;
   justify-content: center;
-  margin-top: 40px;
+  align-items: center;
+  margin-top: 200px;
   gap: 3px;
-  /* visibility: hidden; */
 }
 
 .set-player input {
