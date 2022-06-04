@@ -30,26 +30,32 @@ const gameBoard = (() => {
 //display contents on webpage
 const displayController = (() => {
   const square = document.querySelectorAll('.square');
-  const playerOneBtn = document.querySelector('.player-one button');
-  const playerTwoBtn = document.querySelector('.player-two button');
-  const playerOneDiv = document.querySelector('.player-one');
-  const playerTwoDiv = document.querySelector('.player-two');
+  const submitName = document.querySelector('.set-player button');
 
   function createEventListeners() {
     for (let i = 0; i < square.length; i++) {
       square[i].addEventListener('click', gameController.selectSquare);
     }
-    playerOneBtn.addEventListener('click', () => {
-      const input = document.querySelector('.player-one input');
-      setName(playerOne, input.value, playerOneDiv, playerTwoDiv);
-      
-    });
   }
 
   function removeEventlisteners() {
     for (let i = 0; i < square.length; i++) {
       square[i].removeEventListener('click', gameController.selectSquare);
     }
+  }
+
+  function startGame() {
+    submitName.addEventListener('click', () => {
+      const playerOneName = document.querySelector('#name').value;
+      const playerTwoName = document.querySelector('#name2').value;
+      const setPlayer = document.querySelector('.set-player');
+      playerOne.name = playerOneName;
+      playerTwo.name = playerTwoName;
+      console.log(playerOne.name);
+      console.log(playerTwo.name);
+      setPlayer.style.visibility = 'hidden';
+      displayController.createEventListeners();
+    })
   }
 
   function displayBoard(gameboard) {
@@ -64,7 +70,9 @@ const displayController = (() => {
     opponentDiv.style.display = 'flex';
   }
 
-  return {displayBoard, createEventListeners, removeEventlisteners};
+
+
+  return {displayBoard, createEventListeners, removeEventlisteners, startGame};
 })();
 
 
@@ -124,7 +132,4 @@ const gameController = (() => {
 
 
 
-
-
-displayController.createEventListeners();
-
+displayController.startGame();
