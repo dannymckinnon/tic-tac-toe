@@ -56,6 +56,8 @@ const displayController = (() => {
     ];
     displayController.createEventListeners();
     displayBoard(gameBoard.board);
+    const message = document.querySelector('.message');
+    message.textContent = '';
   }
 
   function startGame() {
@@ -65,6 +67,7 @@ const displayController = (() => {
       const setPlayer = document.querySelector('.set-player');
       const container = document.querySelector('.container');
       const reset = document.querySelector('.reset');
+      const message = document.querySelector('.message');
       
       playerOne.name = playerOneName;
       playerTwo.name = playerTwoName;
@@ -74,6 +77,7 @@ const displayController = (() => {
       setPlayer.style.display = 'none';
       container.style.display = 'flex';
       reset.style.display = 'block';
+      message.style.display = 'block';
       displayController.createEventListeners();
     })
   }
@@ -95,10 +99,7 @@ const displayController = (() => {
     const scoreP1 = document.querySelector('.player-one-stats h2');
     const scoreP2 = document.querySelector('.player-two-stats h2');
 
-    
-
     player.team === 'X' ? scoreP1.textContent = player.wins : scoreP2.textContent = player.wins;
-
   }
 
   function setName(player, newName, playerDiv, opponentDiv) {
@@ -129,6 +130,7 @@ const gameController = (() => {
     const colSlice3 = [gameboard[2], gameboard[5], gameboard[8]]; 
     const diagSlice1 = [gameboard[0], gameboard[4], gameboard[8]];
     const diagSlice2 = [gameboard[2], gameboard[4], gameboard[6]];
+    const message = document.querySelector('.message');
 
     const sliceArray = [rowSlice1, rowSlice2, rowSlice3,
                         colSlice1, colSlice2, colSlice3,
@@ -142,14 +144,14 @@ const gameController = (() => {
         player.wins++;
         displayController.updateWin(player);
         movesPlayed = 0;
-        console.log(`${player.team} has won!`);
+        message.textContent = `${player.name} has won!`;
         return;
       } 
     }
     if (movesPlayed === 9) {
       displayController.removeEventlisteners();
       movesPlayed = 0
-      console.log('its a tye');
+      message.textContent = 'Tye game!';
       return;
     }
   }
