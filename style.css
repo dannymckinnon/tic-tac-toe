@@ -15,10 +15,9 @@ body {
 
 .container {
   justify-content: space-around;
-  /* padding: 1rem 30rem; */
   display: none;
   max-width: 900px;
-  margin: 10% auto;
+  margin: 10% auto 0;
   gap: 1rem;
 }
 
@@ -55,10 +54,15 @@ body {
   padding: 0.3rem;
 }
 
-.set-player button {
+.set-player button,
+.reset {
   border-style: none;
   padding: 0.4rem;
   border-radius: 0.2rem;
+}
+
+
+.set-player button {
   margin-top: 0.4rem;
 }
 
@@ -72,4 +76,8 @@ body {
   text-align: center;
 }
 
-
+.reset {
+  display: block;
+  margin: 50px auto 0;
+  display: none;
+}

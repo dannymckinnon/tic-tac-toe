@@ -1,10 +1,9 @@
 //player factory
 const Player = (team) => {
   let name = '';
-  function setName() {
-    const nameElement = document.querySelector()
-  }
-  return {team, name};
+  let wins = 0;
+  
+  return {team, name, wins};
 };
 
 
@@ -39,6 +38,8 @@ const displayController = (() => {
     for (let i = 0; i < square.length; i++) {
       square[i].addEventListener('click', gameController.selectSquare);
     }
+    const reset = document.querySelector('.reset');
+    reset.addEventListener('click', resetBoard);
   }
 
   function removeEventlisteners() {
@@ -47,12 +48,26 @@ const displayController = (() => {
     }
   }
 
+  function resetBoard() {
+    gameBoard.board = [
+      '', '', '',
+      '', '', '',
+      '', '', ''
+    ];
+    gameController.movesPlayed = 0;
+    console.log(gameController.movesPlayed);
+    displayController.createEventListeners();
+    displayBoard(gameBoard.board);
+  }
+
   function startGame() {
     submitName.addEventListener('click', () => {
       const playerOneName = document.querySelector('#name').value;
       const playerTwoName = document.querySelector('#name2').value;
       const setPlayer = document.querySelector('.set-player');
       const container = document.querySelector('.container');
+      const reset = document.querySelector('.reset');
+      
       playerOne.name = playerOneName;
       playerTwo.name = playerTwoName;
       displayName(playerOneName, playerTwoName);
@@ -60,6 +75,7 @@ const displayController = (() => {
       console.log(playerTwo.name);
       setPlayer.style.display = 'none';
       container.style.display = 'flex';
+      reset.style.display = 'block';
       displayController.createEventListeners();
     })
   }
@@ -77,15 +93,23 @@ const displayController = (() => {
     }
   }
 
+  function updateWin (player) {
+    const scoreP1 = document.querySelector('.player-one-stats h2');
+    const scoreP2 = document.querySelector('.player-two-stats h2');
+
+    
+
+    player.team === 'X' ? scoreP1.textContent = player.wins : scoreP2.textContent = player.wins;
+
+  }
+
   function setName(player, newName, playerDiv, opponentDiv) {
     player.name = newName;
     playerDiv.style.display = 'none';
     opponentDiv.style.display = 'flex';
   }
 
-
-
-  return {displayBoard, createEventListeners, removeEventlisteners, startGame};
+  return {displayBoard, createEventListeners, removeEventlisteners, startGame, updateWin};
 })();
 
 
@@ -117,6 +141,10 @@ const gameController = (() => {
       const result = allEqual(sliceArray[i]);
       if (result) {
         displayController.removeEventlisteners();
+        player.wins++;
+        displayController.updateWin(player);
+        //run function to update DOm to show wins
+        console.log(player.wins);
         console.log(`${player.team} has won!`);
         return;
       } 
@@ -134,13 +162,13 @@ const gameController = (() => {
       gameBoard.board[index] = lastPlayer.team;
       displayController.displayBoard(gameBoard.board);
       movesPlayed++;
-      console.log(movesPlayed);
+      // console.log(movesPlayed);
       checkWin(gameBoard.board, lastPlayer);
       lastPlayer = (lastPlayer === playerOne) ? playerTwo : playerOne;
     }
   }
 
-  return {selectSquare};
+  return {selectSquare, movesPlayed};
 })();
 
 
