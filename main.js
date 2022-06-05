@@ -75,7 +75,7 @@ const displayController = (() => {
       console.log(playerOne.name);
       console.log(playerTwo.name);
       setPlayer.style.display = 'none';
-      container.style.display = 'flex';
+      container.style.display = 'grid';
       reset.style.display = 'block';
       message.style.display = 'block';
       displayController.createEventListeners();

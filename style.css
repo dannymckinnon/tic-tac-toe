@@ -16,9 +16,12 @@ body {
 .container {
   justify-content: space-around;
   display: none;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 5% auto 0;
   gap: 1rem;
+  /* border: 1px solid red; */
+  text-align: center;
+  grid-template-columns: 2fr 1fr 2fr;
 }
 
 .game-board {
