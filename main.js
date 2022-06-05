@@ -172,5 +172,10 @@ const gameController = (() => {
 })();
 
 
+const aiController = (() => {
+  
+  return {};
+})();
+
 
 displayController.startGame();

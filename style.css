@@ -44,7 +44,8 @@ body {
 }
 
 .set-player {
-  display: grid;
+  display: none;
+  /* display: grid; */
   justify-content: center;
   margin-top: 12%;
   gap: 3px;
@@ -58,7 +59,8 @@ body {
 }
 
 .set-player button,
-.reset {
+.reset,
+.player-number button {
   border-style: none;
   padding: 0.4rem;
   border-radius: 0.2rem;
@@ -93,5 +95,13 @@ body {
   /* left: 47%; */
   height: 100px;
   padding-top: 50px;
+  /* border: 1px solid red; */
+}
+
+.player-number {
+  margin: 15%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   /* border: 1px solid red; */
 }
