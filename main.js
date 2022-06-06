@@ -177,24 +177,26 @@ const gameController = (() => {
 
   function selectSquare(e) {
     const index = e.target.getAttribute('data-index');
-    if (gameBoard.board[index] === '') {
-      gameBoard.board[index] = lastPlayer.team;
-      displayController.displayBoard(gameBoard.board);
-      movesPlayed++;
-      // console.log(movesPlayed);
-      checkWin(gameBoard.board, lastPlayer);
-      lastPlayer = (lastPlayer === playerOne) ? playerTwo : playerOne;
+    if (playerTwo.name !== 'CPU') {
+      if (gameBoard.board[index] === '') {
+        gameBoard.board[index] = lastPlayer.team;
+        displayController.displayBoard(gameBoard.board);
+        movesPlayed++;
+        // console.log(movesPlayed);
+        checkWin(gameBoard.board, lastPlayer);
+        lastPlayer = (lastPlayer === playerOne) ? playerTwo : playerOne;
+        return;
+      }
     }
+    aiController.selectSquare(index);
   }
 
-  return {selectSquare, reset};
+  return {selectSquare, reset, checkWin};
 })();
 
 
 const aiController = (() => {
   function startCpu() {
-    const playerOneName = document.querySelector('#name').value;
-    const playerTwoName = document.querySelector('#name2').value;
     const setPlayer = document.querySelector('.set-player');
     const container = document.querySelector('.container');
     const reset = document.querySelector('.reset');
@@ -207,10 +209,28 @@ const aiController = (() => {
     container.style.display = 'grid';
     reset.style.display = 'block';
     message.style.display = 'block';
-    displayController.createEventListeners();
+  }
+
+  function selectSquare(index) {
+    if (gameBoard.board[index] === '') {
+      gameBoard.board[index] = playerOne.team;
+      displayController.displayBoard(gameBoard.board);
+      aiMove(parseInt(index));
+    } 
+  }
+
+  function aiMove(index) {
+    let emptyIndices = [];
+    for (let i = 0; i < gameBoard.board.length; i++) {
+      if (gameBoard.board[i] === '') {
+        emptyIndices.push(i);
+      }
+    }
+    gameController.checkWin(gameBoard.board, playerOne);
+    console.log(emptyIndices);
   }
   
-  return {startCpu};
+  return {startCpu, selectSquare};
 })();
 
 
