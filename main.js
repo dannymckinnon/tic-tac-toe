@@ -33,13 +33,22 @@ const gameBoard = (() => {
 const displayController = (() => {
   const square = document.querySelectorAll('.square');
   const submitName = document.querySelector('.set-player button');
+  const twoPlayer = document.querySelector('.two-player');
+  const playerNumber = document.querySelector('.player-number');
 
   function createEventListeners() {
     for (let i = 0; i < square.length; i++) {
       square[i].addEventListener('click', gameController.selectSquare);
     }
+
     const reset = document.querySelector('.reset');
     reset.addEventListener('click', resetBoard);
+
+    twoPlayer.addEventListener('click', () => {
+      const setPlayer = document.querySelector('.set-player');
+      setPlayer.style.display = 'grid';
+      playerNumber.style.display = 'none';
+    })
   }
 
   function removeEventlisteners() {
@@ -58,6 +67,7 @@ const displayController = (() => {
     displayBoard(gameBoard.board);
     const message = document.querySelector('.message');
     message.textContent = '';
+    gameController.reset();
   }
 
   function startGame() {
@@ -72,8 +82,6 @@ const displayController = (() => {
       playerOne.name = playerOneName;
       playerTwo.name = playerTwoName;
       displayName(playerOneName, playerTwoName);
-      console.log(playerOne.name);
-      console.log(playerTwo.name);
       setPlayer.style.display = 'none';
       container.style.display = 'grid';
       reset.style.display = 'block';
@@ -119,6 +127,11 @@ const displayController = (() => {
 const gameController = (() => {
   let lastPlayer = playerOne;
   let movesPlayed = 0;
+
+  function reset() {
+    lastPlayer = playerOne;
+    movesPlayed = 0;
+  }
 
   function checkWin(gameboard, player) {
     //divide up the gameboard into winning combos
@@ -168,7 +181,7 @@ const gameController = (() => {
     }
   }
 
-  return {selectSquare, movesPlayed};
+  return {selectSquare, movesPlayed, lastPlayer, reset};
 })();
 
 
@@ -179,3 +192,4 @@ const aiController = (() => {
 
 
 displayController.startGame();
+displayController.createEventListeners();
