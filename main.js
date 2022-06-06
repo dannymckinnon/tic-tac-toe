@@ -34,6 +34,7 @@ const displayController = (() => {
   const square = document.querySelectorAll('.square');
   const submitName = document.querySelector('.set-player button');
   const twoPlayer = document.querySelector('.two-player');
+  const onePlayer = document.querySelector('.one-player');
   const playerNumber = document.querySelector('.player-number');
 
   function createEventListeners() {
@@ -49,6 +50,11 @@ const displayController = (() => {
       setPlayer.style.display = 'grid';
       playerNumber.style.display = 'none';
     })
+
+    onePlayer.addEventListener('click', () => {
+      playerNumber.style.display = 'none';
+      aiController.startCpu();
+      });
   }
 
   function removeEventlisteners() {
@@ -116,7 +122,7 @@ const displayController = (() => {
     opponentDiv.style.display = 'flex';
   }
 
-  return {displayBoard, createEventListeners, removeEventlisteners, startGame, updateWin};
+  return {displayBoard, displayName, createEventListeners, removeEventlisteners, startGame, updateWin};
 })();
 
 
@@ -181,13 +187,30 @@ const gameController = (() => {
     }
   }
 
-  return {selectSquare, movesPlayed, lastPlayer, reset};
+  return {selectSquare, reset};
 })();
 
 
 const aiController = (() => {
+  function startCpu() {
+    const playerOneName = document.querySelector('#name').value;
+    const playerTwoName = document.querySelector('#name2').value;
+    const setPlayer = document.querySelector('.set-player');
+    const container = document.querySelector('.container');
+    const reset = document.querySelector('.reset');
+    const message = document.querySelector('.message');
+    
+    playerOne.name = 'Player';
+    playerTwo.name = 'CPU';
+    displayController.displayName(playerOne.name, playerTwo.name);
+    setPlayer.style.display = 'none';
+    container.style.display = 'grid';
+    reset.style.display = 'block';
+    message.style.display = 'block';
+    displayController.createEventListeners();
+  }
   
-  return {};
+  return {startCpu};
 })();
 
 
