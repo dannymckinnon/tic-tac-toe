@@ -214,8 +214,9 @@ const aiController = (() => {
   function selectSquare(index) {
     if (gameBoard.board[index] === '') {
       gameBoard.board[index] = playerOne.team;
-      displayController.displayBoard(gameBoard.board);
       aiMove(parseInt(index));
+      displayController.displayBoard(gameBoard.board);
+      
     } 
   }
 
@@ -226,9 +227,12 @@ const aiController = (() => {
         emptyIndices.push(i);
       }
     }
+    randomInd = Math.floor(Math.random() * emptyIndices.length);
+    gameBoard.board[emptyIndices[randomInd]] = playerTwo.team;
     gameController.checkWin(gameBoard.board, playerOne);
-    console.log(emptyIndices);
+    gameController.checkWin(gameBoard.board, playerTwo);
   }
+  
   
   return {startCpu, selectSquare};
 })();
